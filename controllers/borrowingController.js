@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 
 exports.borrowBook = async (req, res) => {
   const { userId, bookId } = req.body;
-
+  
   try {
     // Check if the user exists
     const user = await User.findById(userId);

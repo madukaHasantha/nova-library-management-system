@@ -1,6 +1,6 @@
-const User = require('../models/userModel');
-const Auth = require('../models/authModel');
-const bcrypt = require('bcryptjs');
+const User = require("../models/userModel");
+const Auth = require("../models/authModel");
+const bcrypt = require("bcryptjs");
 
 exports.createUser = async (req, res) => {
   // Extract user details from request body
@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
     // Check if user already exists
     const existingUser = await User.findOne({ authId: email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     // Hash password
@@ -24,35 +24,32 @@ exports.createUser = async (req, res) => {
     const user = new User({ authId: email, name, type });
     await user.save();
 
-    res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
 exports.deleteUser = async (req, res) => {
   const userId = req.params.id; // User ID
-  //console.log(userId);
+
   try {
-      // Check if user exists
-      const user = await User.findById(userId);
-      if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-      // Delete associated authentication document
-      await Auth.findByIdAndDelete(user.authId);
+    // Delete associated authentication document
+    await Auth.findByIdAndDelete(user.authId);
 
-      // Delete user document
-      await User.findByIdAndDelete(userId); 
+    // Delete user document
+    await User.findByIdAndDelete(userId);
 
-      res.json({ message: 'User deleted successfully' });
+    res.json({ message: "User deleted successfully" });
   } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'Server Error' });
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
   }
 };
-
-  
-
