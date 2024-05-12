@@ -3,15 +3,15 @@ const router = express.Router();
 const BorrowingController = require('../controllers/borrowingController');
 
 // Borrow Book
-router.post('/', BorrowingController.borrowBook);
+router.post('create/', BorrowingController.borrowBook);
 
 // Return Book
-router.put('/:id', BorrowingController.returnBook);
+router.put('/delete/:id', BorrowingController.returnBook);
 
 // View Self Borrowings
-router.get('/self', BorrowingController.getSelfBorrowings);
+router.get('get_self/self', BorrowingController.getSelfBorrowings);
 
 // View Borrowings by User
-router.get('/:userId', BorrowingController.getBorrowingsByUser);
+router.get('get_by_user/:userId', BorrowingController.getBorrowingsByUser);
 
 module.exports = router;

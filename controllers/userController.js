@@ -33,7 +33,7 @@ exports.createUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     const userId = req.params.id; // User ID
-  
+    console.log(userId);
     try {
       // Check if user exists
       const user = await User.findById(userId);
