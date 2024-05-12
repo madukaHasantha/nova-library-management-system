@@ -6,12 +6,12 @@ const BorrowingController = require('../controllers/borrowingController');
 router.post('create/', BorrowingController.borrowBook);
 
 // Return Book
-router.put('/delete/:id', BorrowingController.returnBook);
+router.put('/return/:id', BorrowingController.returnBook);
 
 // View Self Borrowings
-router.get('get_self/self', BorrowingController.getSelfBorrowings);
+router.get('/get_self_borrowing', BorrowingController.getSelfBorrowings);
 
 // View Borrowings by User
-router.get('get_by_user/:userId', BorrowingController.getBorrowingsByUser);
+router.get('/get_by_user/:userId', BorrowingController.getBorrowingsByUser);
 
 module.exports = router;
