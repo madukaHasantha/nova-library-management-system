@@ -24,10 +24,17 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// Handle server errors
+server.on("error", (error) => {
+  console.error("Server error:", error);
+});
+
+// Connect to MongoDB
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
   console.log("Connected to the database");
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
 });
